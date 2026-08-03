@@ -1,0 +1,17 @@
+[project]
+name = "you-know"
+version = "0.1.0"
+description = "AI-agnostic personal knowledge model — any AI can query what you understand before answering"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.0.0",
+    "pydantic>=2.0.0",
+]
+
+[project.scripts]
+you-know = "you_know.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
