@@ -81,9 +81,21 @@ Concept
 
 ## Project status
 
-v0.1 — MCP server working, JSON file storage, seed data from grok-build learning context.
+**v0.2** — Passive growth engine, Pull mode, BKT confidence, SQLite backend. See [Phase 0-3 review notes](https://github.com/lijiaaaaa-bot/you-know/commit/a38eae7).
 
-Next:
-- [ ] Hierarchical concept inference (if parent known → child likely known)
-- [ ] Batch import from conversation
-- [ ] Periodic review of "learning" concepts
+### Architecture (v0.2)
+
+| Component | File | Role |
+|-----------|------|------|
+| Data models | `src/you_know/models.py` | Concept + KnowledgeGraph, DepthLevel, BKT confidence, forgetting curve |
+| Fast matcher | `src/you_know/matcher.py` | Aho-Corasick automaton, lemmatization, passive term extraction |
+| Storage | `src/you_know/store.py` | JSON file (default) + SQLite+FTS5 (optional) |
+| Engine | `src/you_know/engine.py` | Breadth-first explanation, context-aware depth, passive inference |
+| MCP Server | `src/you_know/server.py` | 10 tools: check_answer, extract_terms, analyze_conversation, get_learning_summary, etc. |
+
+### Key design principles (from multi-perspective review)
+
+1. **Pull > Push**: AI answers stay clean. you-know learns silently. User checks dashboard on demand.
+2. **Growth must be passive**: Concepts auto-register from conversation. Manual `mark_known` is the backup, not the primary path.
+3. **Depth is continuous**: Bloom taxonomy levels (exposed → transfer), not just known/unknown.
+4. **Time matters**: Ebbinghaus forgetting curve — concepts decay if not retrieved. Knowledge isn't permanent.
