@@ -8,9 +8,13 @@
       "parent_ids": [],
       "status": "known",
       "confidence": 1.0,
+      "depth_level": "exposed",
       "evidence": [
         "用户写了 old_vs_new.py: subprocess, re, json 等"
       ],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "git": {
@@ -21,9 +25,13 @@
       "parent_ids": [],
       "status": "known",
       "confidence": 1.0,
+      "depth_level": "exposed",
       "evidence": [
         "用户项目都是 Git 仓库，日常使用 push/commit/branch"
       ],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "terminal": {
@@ -34,9 +42,13 @@
       "parent_ids": [],
       "status": "known",
       "confidence": 1.0,
+      "depth_level": "exposed",
       "evidence": [
         "用户熟练使用 bash、环境变量、curl 等"
       ],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "intent-lab": {
@@ -47,9 +59,13 @@
       "parent_ids": [],
       "status": "known",
       "confidence": 1.0,
+      "depth_level": "exposed",
       "evidence": [
         "用户创建了 intent-lab 项目"
       ],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "mcp": {
@@ -60,9 +76,13 @@
       "parent_ids": [],
       "status": "known",
       "confidence": 0.9,
+      "depth_level": "exposed",
       "evidence": [
         "用户的 intent-lab 项目通过 MCP 暴露工具"
       ],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "agentic-design-patterns": {
@@ -73,9 +93,13 @@
       "parent_ids": [],
       "status": "learning",
       "confidence": 0.7,
+      "depth_level": "exposed",
       "evidence": [
         "用户正在系统学习 Grok Build 源码中的这些模式"
       ],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "grok-build": {
@@ -86,9 +110,13 @@
       "parent_ids": [],
       "status": "learning",
       "confidence": 0.8,
+      "depth_level": "exposed",
       "evidence": [
         "用户正在学习其源码"
       ],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "rust": {
@@ -102,7 +130,11 @@
       "parent_ids": [],
       "status": "unknown",
       "confidence": 0.0,
+      "depth_level": "exposed",
       "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "claude-code-hook": {
@@ -118,9 +150,13 @@
       ],
       "status": "learning",
       "confidence": 0.0,
+      "depth_level": "exposed",
       "evidence": [
         "刚刚配置完 grok-build 的 hooks"
       ],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "claude-code": {
@@ -134,9 +170,13 @@
       "parent_ids": [],
       "status": "known",
       "confidence": 1.0,
+      "depth_level": "exposed",
       "evidence": [
         "用户每天都在使用"
       ],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "claude-code-settings": {
@@ -152,7 +192,11 @@
       ],
       "status": "learning",
       "confidence": 0.0,
+      "depth_level": "exposed",
       "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "claude-code-memory": {
@@ -168,7 +212,11 @@
       ],
       "status": "learning",
       "confidence": 0.0,
+      "depth_level": "exposed",
       "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "session-context": {
@@ -184,7 +232,11 @@
       ],
       "status": "learning",
       "confidence": 0.0,
+      "depth_level": "exposed",
       "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "bootstrap": {
@@ -198,7 +250,11 @@
       "parent_ids": [],
       "status": "learning",
       "confidence": 0.0,
+      "depth_level": "exposed",
       "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "reflection-pattern": {
@@ -214,7 +270,11 @@
       ],
       "status": "learning",
       "confidence": 0.0,
+      "depth_level": "exposed",
       "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "recursive-explanation": {
@@ -229,7 +289,11 @@
       ],
       "status": "learning",
       "confidence": 0.0,
+      "depth_level": "exposed",
       "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "you-know": {
@@ -243,7 +307,11 @@
       "parent_ids": [],
       "status": "learning",
       "confidence": 0.0,
+      "depth_level": "exposed",
       "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "knowledge-graph": {
@@ -259,7 +327,11 @@
       ],
       "status": "learning",
       "confidence": 0.0,
+      "depth_level": "exposed",
       "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "sqlite": {
@@ -270,7 +342,11 @@
       "parent_ids": [],
       "status": "unknown",
       "confidence": 0.0,
+      "depth_level": "exposed",
       "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
     },
     "student-model": {
@@ -286,14 +362,97 @@
       ],
       "status": "unknown",
       "confidence": 0.0,
+      "depth_level": "exposed",
       "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
       "last_updated": "2026-08-03T02:08:42Z"
+    },
+    "websocket": {
+      "id": "websocket",
+      "name": "WebSocket",
+      "explanation": "A technical concept encountered in conversation context: \"We use WebSocket protocol with Redis caching for CAP the\"",
+      "aliases": [],
+      "parent_ids": [],
+      "status": "unknown",
+      "confidence": 0.0,
+      "depth_level": "exposed",
+      "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
+      "last_updated": "2026-08-03T03:28:34Z"
+    },
+    "trade-offs": {
+      "id": "trade-offs",
+      "name": "trade-offs",
+      "explanation": "A technical concept encountered in conversation context: \"ocol with Redis caching for CAP theorem trade-offs. Kubernetes manages etcd.\"",
+      "aliases": [],
+      "parent_ids": [],
+      "status": "unknown",
+      "confidence": 0.0,
+      "depth_level": "exposed",
+      "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
+      "last_updated": "2026-08-03T03:28:34Z"
+    },
+    "cap": {
+      "id": "cap",
+      "name": "CAP",
+      "explanation": "A technical concept encountered in conversation context: \"bSocket protocol with Redis caching for CAP theorem trade-offs. Kubernetes manages\"",
+      "aliases": [],
+      "parent_ids": [],
+      "status": "unknown",
+      "confidence": 0.0,
+      "depth_level": "exposed",
+      "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
+      "last_updated": "2026-08-03T03:28:34Z"
+    },
+    "redis": {
+      "id": "redis",
+      "name": "Redis",
+      "explanation": "A technical concept encountered in conversation context: \"We use WebSocket protocol with Redis caching for CAP theorem trade-offs. Kub\"",
+      "aliases": [],
+      "parent_ids": [],
+      "status": "unknown",
+      "confidence": 0.0,
+      "depth_level": "exposed",
+      "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
+      "last_updated": "2026-08-03T03:28:34Z"
+    },
+    "kubernetes": {
+      "id": "kubernetes",
+      "name": "Kubernetes",
+      "explanation": "A technical concept encountered in conversation context: \"dis caching for CAP theorem trade-offs. Kubernetes manages etcd.\"",
+      "aliases": [],
+      "parent_ids": [],
+      "status": "unknown",
+      "confidence": 0.0,
+      "depth_level": "exposed",
+      "evidence": [],
+      "evidence_quality": "auto",
+      "last_retrieval": "",
+      "stability": 0.0,
+      "last_updated": "2026-08-03T03:28:34Z"
     }
   },
   "stats": {
-    "total": 20,
+    "total": 25,
     "known": 6,
     "learning": 11,
-    "unknown": 3
+    "unknown": 8,
+    "by_depth": {
+      "exposed": 25
+    },
+    "avg_confidence": 0.296
   }
 }
