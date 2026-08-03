@@ -84,14 +84,27 @@ class KnowledgeGraph:
 
     def __init__(self, concepts: dict[str, Concept] | None = None):
         self.concepts: dict[str, Concept] = concepts or {}
+        self._alias_index: dict[str, str] = {}  # alias → concept_id, O(1) lookup
+        self._rebuild_index()
+
+    def _rebuild_index(self) -> None:
+        """Rebuild the alias → concept_id reverse index."""
+        self._alias_index = {}
+        for c in self.concepts.values():
+            self._alias_index[c.id] = c.id
+            self._alias_index[c.name.lower()] = c.id
+            for alias in c.aliases:
+                self._alias_index[alias.lower()] = c.id
 
     def get(self, id: str) -> Optional[Concept]:
-        """Get a concept by id or alias."""
+        """Get a concept by id or alias. O(1) via reverse index."""
+        # Try direct ID lookup first
         if id in self.concepts:
             return self.concepts[id]
-        for c in self.concepts.values():
-            if id in c.aliases:
-                return c
+        # Then alias index (O(1))
+        concept_id = self._alias_index.get(id.lower())
+        if concept_id:
+            return self.concepts.get(concept_id)
         return None
 
     def is_known(self, id: str) -> bool:
@@ -107,6 +120,13 @@ class KnowledgeGraph:
                 return True
         return False
 
+    def is_learning(self, id: str) -> bool:
+        """Check if a concept is in learning status."""
+        c = self.get(id)
+        if c is None:
+            return False
+        return c.status == KnowledgeStatus.LEARNING
+
     def is_unknown(self, id: str) -> bool:
         """Check if a concept is explicitly unknown."""
         c = self.get(id)
@@ -121,6 +141,11 @@ class KnowledgeGraph:
 
     def add(self, concept: Concept) -> None:
         self.concepts[concept.id] = concept
+        # Update alias index incrementally
+        self._alias_index[concept.id] = concept.id
+        self._alias_index[concept.name.lower()] = concept.id
+        for alias in concept.aliases:
+            self._alias_index[alias.lower()] = concept.id
 
     def mark_known(self, id: str, evidence: str = "") -> Optional[Concept]:
         """Mark a concept as known."""
@@ -188,4 +213,5 @@ class KnowledgeGraph:
         concepts = {}
         for k, v in d.get("concepts", {}).items():
             concepts[k] = Concept.from_dict(v)
-        return cls(concepts)
+        graph = cls(concepts)
+        return graph

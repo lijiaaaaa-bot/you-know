@@ -16,27 +16,35 @@ if TYPE_CHECKING:
 def extract_mentioned_concepts(text: str, store: "KnowledgeStore") -> list[str]:
     """Find which concepts from the knowledge graph are mentioned in the text.
 
-    Returns concept IDs sorted by priority (unknown first).
+    Returns concept IDs sorted by priority (needs-explanation first, known last).
+    Learning-status concepts are treated as needing explanation (user hasn't mastered yet).
     """
+    text_lower = text.lower()
     mentioned = set()
     for concept in store.graph.concepts.values():
         terms = [concept.name] + concept.aliases
         for term in terms:
-            # Match word boundaries for multi-word terms, substring for short ones
-            if len(term) > 4:
-                pattern = re.escape(term.lower())
-                if re.search(pattern, text.lower()):
+            term_lower = term.lower()
+            # Use word-boundary regex for all terms to avoid false positives
+            # e.g. "rust" should NOT match "trust", "crust", "frustration"
+            pattern = r'\b' + re.escape(term_lower) + r'\b'
+            try:
+                if re.search(pattern, text_lower):
                     mentioned.add(concept.id)
                     break
-            else:
-                if term.lower() in text.lower():
+            except re.error:
+                # Fallback: substring match for terms with special chars
+                if term_lower in text_lower:
                     mentioned.add(concept.id)
                     break
 
-    # Sort: unknown first
-    unknown = [id for id in mentioned if store.graph.is_unknown(id)]
-    known = [id for id in mentioned if store.graph.is_known(id) and id not in unknown]
-    return unknown + known
+    # Sort: unknown + learning first (both need explanation), then known
+    needs_explanation = [
+        id for id in mentioned
+        if store.graph.is_unknown(id) or store.graph.is_learning(id)
+    ]
+    known = [id for id in mentioned if store.graph.is_known(id) and id not in needs_explanation]
+    return needs_explanation + known
 
 
 def explain_recursively(
@@ -44,6 +52,7 @@ def explain_recursively(
     store: "KnowledgeStore",
     max_depth: int = 3,
     current_depth: int = 0,
+    visited: set[str] | None = None,
 ) -> str:
     """Recursively expand unknown concepts in text.
 
@@ -52,29 +61,38 @@ def explain_recursively(
         store: Knowledge store to check against.
         max_depth: Maximum recursion depth (prevents infinite loops).
         current_depth: Current recursion depth.
+        visited: Set of concept IDs already explained (prevents circular refs).
 
     Returns:
         Text with unknown concepts explained inline.
     """
+    if visited is None:
+        visited = set()
+
     if current_depth >= max_depth:
         return text
 
     mentioned = extract_mentioned_concepts(text, store)
-    unknown = [id for id in mentioned if store.graph.is_unknown(id)]
+    needs_explanation = [
+        id for id in mentioned
+        if (store.graph.is_unknown(id) or store.graph.is_learning(id))
+        and id not in visited
+    ]
 
-    if not unknown:
+    if not needs_explanation:
         return text
 
-    # Build explanations for unknown concepts
+    # Build explanations for concepts needing explanation
     explanations: list[tuple[str, str]] = []
-    for concept_id in unknown:
+    for concept_id in needs_explanation:
         c = store.graph.get(concept_id)
         if c is None:
             continue
+        visited.add(concept_id)
         # Recursively check if the explanation itself has unknowns
         raw_explanation = c.explanation
         expanded = explain_recursively(
-            raw_explanation, store, max_depth, current_depth + 1
+            raw_explanation, store, max_depth, current_depth + 1, visited
         )
         explanations.append((c.name, expanded))
 
@@ -106,7 +124,7 @@ def check_answer(
         }
     """
     mentioned = extract_mentioned_concepts(answer, store)
-    unknown = [id for id in mentioned if store.graph.is_unknown(id)]
+    unknown = [id for id in mentioned if store.graph.is_unknown(id) or store.graph.is_learning(id)]
     known = [id for id in mentioned if store.graph.is_known(id)]
 
     result = {
